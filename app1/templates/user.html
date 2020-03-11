@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% load static %}
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>User</title>
+            <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
+            <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-8"></div>
+                <div class="col-4">
+                    <a href="/home" class="pr-5">Back</a>
+                    <a href="/logout_process" class="pl-5">Logout</a>
+                </div>
+            </div>
+            <div class="row">{{name}} {{namel}}'s Quotes</div>
+            <div class="row">
+                <ul>
+                    {% for i in quotes %}
+                        <li>{{i.author}}: {{i.quote}}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </body>
+</html>

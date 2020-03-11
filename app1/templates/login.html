@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% load static %}
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Login</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    </head>
+    <body>
+        <div class="container">
+            <div class="row p-1">Welcome!</div>
+            <div class="row">
+                <form method="POST" action="/register_process">
+                    {% csrf_token %}
+                    <div class="col">
+                        <div class="row">Register</div>
+                        <div class="row">First Name:
+                            <input type="text" name="register_name">
+                        </div>
+                        <div class="row">Last Name:
+                            <input type="text" name="register_username">
+                        </div>
+                        <div class="row">Email:
+                            <input type="text" name="register_email">
+                        </div>
+                        <div class="row">Password:
+                            <input type="password" name="register_password">
+                        </div>
+                        <div class="row">*Password must be at least 8 characters</div>
+                        <div class="row">Password Confirmation:
+                            <input type="password" name="register_confirmation">
+                        </div>
+                        <div class="row">
+                            <input type="submit" value="Register">
+                        </div>
+                        <div class="row">
+                            {% if messages %}
+                                <ul>
+                                    {% for i in messages %}
+                                        <li>{{i}}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                        </div>
+                    </div>
+                </form>
+                <form method="POST" action="/login_process">
+                    {% csrf_token %}
+                    <div class="col">
+                        <div class="row">Login</div>
+                        <div class="row">Email:
+                            <input type="text" name="login_email">
+                        </div>
+                        <div class="row">Password:
+                            <input type="password" name="login_password">
+                        </div>
+                        <div class="row">
+                            <input type="submit" value="Login">
+                        </div>
+                    </div>
+                </form>
+        </div>
+    </body>
+</html>

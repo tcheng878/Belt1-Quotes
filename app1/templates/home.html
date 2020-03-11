@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% load static %}
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Home</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-8"></div>
+                <div class="col-4">
+                    <a href="/edit/{{id}}" class="pr-5">Edit My Account</a>
+                    <a href="/logout_process" class="pl-5">Logout</a>
+                </div>
+            </div>
+            <div class="row pb-3">Welcome, {{name}} {{namel}}!  {{request.session.userid}}</div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="row">Recent Book Reviews:</div>
+                    <div class="row">
+                        <ul>
+                            {% for i in quotes %}
+                                <li>
+                                    <p>{{i.author}}: {{i.quote}}</p>
+                                    <p>Posted by <a href="/user/{{i.user.id}}">{{i.user.name}} {{i.user.username}}</a></p>
+                                        <p>{{i.quote_likes.count}} people like this   <a href="/process_like/{{i.id}}">Like!</a></p>
+                                    {% if i.user.id == user_id %}
+                                    <a href="/delete_process/{{i.id}}">Delete</a>
+                                    {% endif %}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="row">
+                        <ul>
+                            {% if messages %}
+                                {% for i in messages %}
+                                    <li>{{i}}</li>
+                                {% endfor %}
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="row">Add a Quote!</div>
+                    <div class="row">
+                        <form method="POST" action="/add_quote_process">
+                            {% csrf_token %}
+                            <div class="row">Author 
+                                <input type="text" name="quote_author">
+                            </div>
+                            <div class="row">Quote
+                                <textarea name="quote"></textarea>
+                            </div>
+                            <div class="row">
+                                <input type="submit" value="Submit">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

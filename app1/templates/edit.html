@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% load static %}
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Edit</title>
+            <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
+            <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-8"></div>
+                <div class="col-4">
+                    <a href="/home" class="pr-5">Back</a>
+                    <a href="/logout_process" class="pl-5">Logout</a>
+                </div>
+            </div>
+            <div class="row">Edit My Account</div>
+            <form method="POST" action="/edit_process">
+                {% csrf_token %}
+                <div class="row">First name
+                    <input type="text" name="register_name" value={{first_name}}>
+                </div>
+                <div class="row">Last name
+                    <input type="text" name="register_username" value={{last_name}}>
+                </div>
+                <div class="row">Email
+                    <input type="text" name="register_email" value={{email}}>
+                </div>
+                <div class="row">
+                    <input type="submit" value="Update">
+                </div>
+            </form>
+        </div>
+    </body>
+</html>
